@@ -7,7 +7,7 @@ Para os saudosos integrantes do grupo:
 
 ### 1 - Abra o cmd do seu computer e digite cd e o endereço do seu desktop, segue exemplo:
 ```
-cd C:\Users\Matchue-Bundudo\Desktop
+cd C:<<Endereço da pasta repositório em seu computer>>
 ```
 * (isso é só um exemplo não copie e cole no teu cmd se vc nao for o Matchue Bundudo) 
 
@@ -21,6 +21,9 @@ git checkout sua-branch
 ```
 * Parabéns, sua branch está no seu computer, pode codar!!!
 ### 4 - Depois de codar bastante digite essa série de comandos para enviar suas mudanças feitas no seu repositório local ao do GitHub:
+```
+cd C:<<Endereço da pasta repositório em seu computer>>
+```
 ```sh
 git add .
 ```
