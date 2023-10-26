@@ -15,21 +15,21 @@ public class Constants {
 		public static float GetSpeed(int type) {
 			switch(type) {
 			case DART:
-				return 8f;
+				return 6f;
 			case MAGIC_1:
-				return 8f;
+				return 7f;
 			case MAGIC_2:
-				return 8f;
+				return 7f;
 			case MAGIC_3:
-				return 8f;
+				return 7f;
 			case ICY_DART:
-				return 8f;
+				return 6f;
 			case KNIFE:
-				return 8f;
+				return 7f;
 			case CANNON_BALL:
-				return 8f;
+				return 7f;
 			case BULLET:
-				return 8f;
+				return 9f;
 				
 			}
 			
@@ -84,7 +84,7 @@ public class Constants {
 			case GUNNER_M:
 				return 20;
 			case PIRATE_M:
-				return 15;
+				return 25;
 			case DIO_M:
 				return 15;
 			}
@@ -95,15 +95,15 @@ public class Constants {
 		public static float GetDefaultRange(int monkeyType) {
 			switch(monkeyType) {
 			case DART_M:
-				return 80;
+				return 105;
 			case MAGE_M:
-				return 75;
+				return 95;
 			case ICY_M:
 				return 80;
 			case GUNNER_M:
-				return 105;
+				return 145;
 			case PIRATE_M:
-				return 85;
+				return 110;
 			case DIO_M:
 				return 90;
 			}
@@ -114,17 +114,17 @@ public class Constants {
 		public static float GetDefaultCooldown(int monkeyType) {
 			switch(monkeyType) {
 			case DART_M:
-				return 20;
+				return 25;
 			case MAGE_M:
-				return 20;
+				return 30;
 			case ICY_M:
-				return 20;
+				return 22.25f;
 			case GUNNER_M:
-				return 40;
+				return 38.25f;
 			case PIRATE_M:
-				return 35;
+				return 42.5f;
 			case DIO_M:
-				return 10;
+				return 15;
 			}
 			
 			return 0;
@@ -175,13 +175,13 @@ public class Constants {
 		public static int GetStartHealth(int bloonType) {
 			switch(bloonType) {
 			case RED_BL:
-				return 50;
+				return 150;
 			case BLUE_BL:
 				return 150;
 			case GREEN_BL:
-				return 20;
+				return 120;
 			case YELLOW_BL:
-				return 25;
+				return 125;
 			}
 			
 			return 0;

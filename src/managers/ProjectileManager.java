@@ -1,6 +1,7 @@
 package managers;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -37,11 +38,11 @@ public class ProjectileManager {
 	public void newProjecile(Monkey m, Bloon bl) {
 		int type = getProjType(m);
 		
-		int xDist = (int) Math.abs(m.getX() - bl.getX());
-		int yDist = (int) Math.abs(m.getY() - bl.getY());
-		int totDist = xDist + yDist;
+		int xDist = (int) (m.getX() - bl.getX());
+		int yDist = (int) (m.getY() - bl.getY());
+		int totDist = Math.abs(xDist) + Math.abs(yDist);
 		
-		float xPer = (float) xDist / totDist;
+		float xPer = (float) Math.abs(xDist) / totDist;
 		
 		float xSpeed = xPer * helperMethods.Constants.Projectiles.GetSpeed(type);
 		float ySpeed = helperMethods.Constants.Projectiles.GetSpeed(type) - xSpeed;
@@ -51,7 +52,13 @@ public class ProjectileManager {
 		if(m.getY() > bl.getY())
 			ySpeed *= -1;
 		
-		projectiles.add(new Projectile(m.getX() + 16, m.getY() + 16, xSpeed, ySpeed, m.getDmg(), proj_id++, type));
+		float arcValue = (float) Math.atan(yDist / (float)xDist);
+		float rotate = (float) Math.toDegrees(arcValue);
+		
+		if(xDist < 0)
+			rotate += 180;
+		
+		projectiles.add(new Projectile(m.getX() + 16, m.getY() + 16, xSpeed, ySpeed, m.getDmg(), rotate, proj_id++, type));
 		
 	}
 	
@@ -72,6 +79,8 @@ public class ProjectileManager {
 		for(Bloon bl : playing.getBloonManager().getBloons()) {
 			if(bl.getBounds().contains(p.getPos())) {
 				bl.hurt(p.getDamage());
+				if(p.getProjectileType() == ICY_DART)
+					bl.slow();
 				return true;
 			}
 		}
@@ -79,9 +88,19 @@ public class ProjectileManager {
 	}
 
 	public void draw(Graphics g) {
+		
+		Graphics2D g2d = (Graphics2D) g;
+		
 		for(Projectile p : projectiles)
-			if(p.isActive())
-				g.drawImage(proj_imgs[p.getProjectileType()], (int) p.getPos().x, (int) p.getPos().y, null);
+			if(p.isActive()) {
+				g2d.translate(p.getPos().x, p.getPos().y);
+				g2d.rotate(Math.toRadians(p.getRotation() + 90));
+//				g2d.scale(1.25, 1.25);
+				g2d.drawImage(proj_imgs[p.getProjectileType()], -16, -16, null);
+//				g2d.scale(1 / 1.25, 1 / 1.25);
+				g2d.rotate(-Math.toRadians(p.getRotation() + 90));
+				g2d.translate(-p.getPos().x, -p.getPos().y);
+			}
 	}
 	
 	private int getProjType(Monkey m) {

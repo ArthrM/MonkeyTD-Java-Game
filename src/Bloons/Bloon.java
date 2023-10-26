@@ -12,6 +12,7 @@ public abstract class Bloon {
 	protected int bloonType;
 	protected int lastDir;
 	protected boolean alive = true;
+	protected int slowTickLimit = 60 * 4, slowTick = slowTickLimit;
 	
 	
 	public Bloon(float x, float y, int ID, int bloonType) {
@@ -34,8 +35,18 @@ public abstract class Bloon {
 			alive = false;
 	}
 	
+	public void slow() {
+		slowTick = 0;
+	}
+	
 	public void move(float speed, int dir) {
 		lastDir = dir;
+		
+		if(slowTick < slowTickLimit) {
+			slowTick ++;
+			speed *= 0.4f;
+		}
+		
 		switch(dir) {
 		case LEFT:
 			this.x -= speed;
@@ -96,5 +107,9 @@ public abstract class Bloon {
 	
 	public boolean isAlive() {
 		return alive;
+	}
+	
+	public boolean isSlowed() {
+		return slowTick < slowTickLimit;
 	}
 }
