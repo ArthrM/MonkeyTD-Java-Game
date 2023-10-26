@@ -21,14 +21,15 @@ public class BloonManager {
 	private Playing playing;
 	private BufferedImage[] bloonImgs;
 	private ArrayList<Bloon> bloons = new ArrayList<>();
-//	private float speed = 0.5f;
 	private PathPoint start, end;
+	private BufferedImage slowEffect;
 	
 	public BloonManager(Playing playing, PathPoint start, PathPoint end) {
 		this.playing = playing;
 		bloonImgs = new BufferedImage[10];
 		this.start = start;
 		this.end = end;
+		loadEffectImg();
 		addBloon(RED_BL);
 		addBloon(BLUE_BL);
 		addBloon(GREEN_BL);
@@ -36,6 +37,10 @@ public class BloonManager {
 		loadBloonImgs();
 	}
 	
+	private void loadEffectImg() {
+		slowEffect = LoadSave.getSpriteAtlas().getSubimage(32 * 2, 32 * 7, 32, 32);
+	}
+
 	private void loadBloonImgs() {
 		
 		BufferedImage atlas = LoadSave.getSpriteAtlas();
@@ -178,7 +183,14 @@ public class BloonManager {
 		for(Bloon bl : bloons)
 			if(bl.isAlive()) {
 				drawBloon(bl, g);
+				drawEffects(bl, g);
 			}
+	}
+
+	private void drawEffects(Bloon bl, Graphics g) {
+		if(bl.isSlowed())
+			g.drawImage(slowEffect, (int) bl.getX(), (int) bl.getY(), null);
+		
 	}
 
 	private void drawBloon(Bloon bl, Graphics g) {
