@@ -11,6 +11,8 @@ import static main.GameStates.*;
 public class Settings extends GameScene implements SceneMethods {
 
 	private MyButton bMainMenu;
+	private MyButton extra;
+	private MyButton timer;
 	
 	public Settings(Game game) {
 		super(game);
@@ -18,20 +20,24 @@ public class Settings extends GameScene implements SceneMethods {
 	}
 
 	private void initButtons() {
-		bMainMenu = new MyButton("Save & Return", 280, 500, 110, 25);
+		bMainMenu = new MyButton("Save & Return", 10, 10, 150, 50);
+		extra = new MyButton("Tutorial", 245, 150, 150, 50);
+	 	timer = new MyButton("Tempo", 245, 250, 150, 50);
 	}
 
 	@Override
 	public void render(Graphics g) {
-		g.setColor(Color.BLUE);
+		g.setColor(Color.CYAN);
 		g.fillRect(0, 0, 640, 640);
 		drawButtons(g);
 		
 	}
 	
 	public void drawButtons(Graphics g) {
-		g.setFont(new Font("Rockwell", Font.PLAIN, 15));
+		g.setFont(new Font("Arial", Font.PLAIN, 15));
 		bMainMenu.draw(g);
+		extra.draw(g);
+		timer.draw(g);
 	}
 
 	@Override
@@ -45,9 +51,15 @@ public class Settings extends GameScene implements SceneMethods {
 	@Override
 	public void mouseMoved(int x, int y) {
 		bMainMenu.setMouseOver(false);
+		extra.setMouseOver(false);
+		timer.setMouseOver(false);
 		
 		if(bMainMenu.getBounds().contains(x, y)) {
 			bMainMenu.setMouseOver(true);
+		} else if(extra.getBounds().contains(x, y)) {
+			extra.setMouseOver(true);
+		} else if(timer.getBounds().contains(x, y)) {
+			timer.setMouseOver(true);
 		}
 		
 	}
@@ -57,6 +69,10 @@ public class Settings extends GameScene implements SceneMethods {
 		
 		if(bMainMenu.getBounds().contains(x, y)) {
 			bMainMenu.setMousePressed(true);
+		} else if(extra.getBounds().contains(x,y)){
+			extra.setMousePressed(true);
+		} else if(timer.getBounds().contains(x,y)){
+			timer.setMousePressed(true);
 		}
 		
 	}
@@ -76,7 +92,8 @@ public class Settings extends GameScene implements SceneMethods {
 	
 	private void resetButtons() {
 		bMainMenu.resetBooleans();
-		
+		extra.resetBooleans();
+		timer.resetBooleans();
 	}
 
 }
