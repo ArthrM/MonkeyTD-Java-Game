@@ -22,6 +22,7 @@ public class MyButton {
 		
 		initBounds();
 	}
+	
 	//Para botões de ladrilhos
 	public MyButton(String text, int x , int y , int width , int height, int id) {
 		this.text = text;

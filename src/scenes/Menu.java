@@ -19,7 +19,6 @@ public class Menu extends GameScene implements SceneMethods{
 //	private BufferedImage img;
 //	private ArrayList<BufferedImage> sprites = new ArrayList<>();
 	private Random random;
-	
 	private MyButton bPlaying, bEdit, bSettings, bQuit;
 	
 	public Menu(Game game) {
@@ -46,7 +45,6 @@ public class Menu extends GameScene implements SceneMethods{
 
 	@Override
 	public void render(Graphics g) {
-		
 		drawButtons(g);
 	}
 	
