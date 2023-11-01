@@ -13,6 +13,8 @@ public class Settings extends GameScene implements SceneMethods {
 	private MyButton bMainMenu;
 	private MyButton extra;
 	private MyButton timer;
+	private MyButton pearson;
+	private MyButton credit;
 	
 	public Settings(Game game) {
 		super(game);
@@ -23,6 +25,8 @@ public class Settings extends GameScene implements SceneMethods {
 		bMainMenu = new MyButton("Save & Return", 10, 10, 150, 50);
 		extra = new MyButton("Tutorial", 245, 150, 150, 50);
 	 	timer = new MyButton("Tempo", 245, 250, 150, 50);
+		pearson = new MyButton("Personagens", 245, 350, 150, 50);
+		credit = new MyButton("Créditos", 245, 450, 150, 50);
 	}
 
 	@Override
@@ -38,6 +42,8 @@ public class Settings extends GameScene implements SceneMethods {
 		bMainMenu.draw(g);
 		extra.draw(g);
 		timer.draw(g);
+		pearson.draw(g);
+		credit.draw(g);
 	}
 
 	@Override
@@ -53,6 +59,8 @@ public class Settings extends GameScene implements SceneMethods {
 		bMainMenu.setMouseOver(false);
 		extra.setMouseOver(false);
 		timer.setMouseOver(false);
+		pearson.setMouseOver(false);
+		credit.setMouseOver(false);
 		
 		if(bMainMenu.getBounds().contains(x, y)) {
 			bMainMenu.setMouseOver(true);
@@ -60,6 +68,10 @@ public class Settings extends GameScene implements SceneMethods {
 			extra.setMouseOver(true);
 		} else if(timer.getBounds().contains(x, y)) {
 			timer.setMouseOver(true);
+		} else if(pearson.getBounds().contains(x,y)){
+			pearson.setMouseOver(true);
+		} else if(credit.getBounds().contains(x,y)){
+			credit.setMouseOver(true);
 		}
 		
 	}
@@ -73,6 +85,10 @@ public class Settings extends GameScene implements SceneMethods {
 			extra.setMousePressed(true);
 		} else if(timer.getBounds().contains(x,y)){
 			timer.setMousePressed(true);
+		} else if(pearson.getBounds().contains(x,y)){
+			pearson.setMousePressed(true);
+		} else if(credit.getBounds().contains(x,y)){
+			credit.setMousePressed(true);
 		}
 		
 	}
@@ -94,6 +110,8 @@ public class Settings extends GameScene implements SceneMethods {
 		bMainMenu.resetBooleans();
 		extra.resetBooleans();
 		timer.resetBooleans();
+		pearson.resetBooleans();
+		credit.resetBooleans();
 	}
 
 }
