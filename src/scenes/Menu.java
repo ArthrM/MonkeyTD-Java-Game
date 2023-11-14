@@ -58,6 +58,7 @@ public class Menu extends GameScene implements SceneMethods{
 		g.setColor(Color.WHITE);
         g.setFont(new Font("Arial", Font.BOLD, 20));
         g.drawString("BEM VINDOS AO NOSSO JOGO!", 170, 100);
+		g.drawString("APROVEITEM!! :)", 240, 600);
 	}
 
 	private void drawButtons(Graphics g){

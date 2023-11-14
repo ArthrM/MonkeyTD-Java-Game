@@ -138,8 +138,9 @@ public class MouseInputs implements MouseListener,MouseMotionListener {
 			game.getSettings().mouseReleased(e.getX(),e.getY());
 			break;
 		case CreditScreen:
-		game.getcreditscreen().mouseReleased(e.getX(),e.getY());
-		break;
+			game.getcreditscreen().mouseReleased(e.getX(),e.getY());
+
+			break;
 		default:
 			break;
 		
