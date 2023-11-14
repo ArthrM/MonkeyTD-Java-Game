@@ -47,7 +47,7 @@ public class Menu extends GameScene implements SceneMethods{
 	@Override
 	public void render(Graphics g) {
 		g.setColor(Color.BLACK); // Change the color as needed
-        g.fillRect(0, 0, 640, 640);
+        g.fillRect(0, 0, 640, 780);
 		drawButtons(g);
 		drawText(g);
 	}

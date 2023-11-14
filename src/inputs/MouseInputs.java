@@ -32,6 +32,7 @@ public class MouseInputs implements MouseListener,MouseMotionListener {
 			break;
 		case CreditScreen: 
 		game.getcreditscreen().mouseDragged(e.getX(),e.getY());
+		break;
 		default:
 			break;
 		
@@ -58,6 +59,7 @@ public class MouseInputs implements MouseListener,MouseMotionListener {
 			break;
 		case CreditScreen: 
 		game.getcreditscreen().mouseMoved(e.getX(),e.getY());
+		break;
 		default:
 			break;
 		
@@ -85,6 +87,7 @@ public class MouseInputs implements MouseListener,MouseMotionListener {
 				break;
 			case CreditScreen:
 			game.getcreditscreen().mouseClicked(e.getX(),e.getY());
+			break;
 			default:
 				break;
 			
@@ -112,6 +115,7 @@ public class MouseInputs implements MouseListener,MouseMotionListener {
 			break;
 		case CreditScreen:
 		game.getcreditscreen().mousePressed(e.getX(),e.getY());
+		break;
 		default:
 			break;
 		
@@ -135,6 +139,7 @@ public class MouseInputs implements MouseListener,MouseMotionListener {
 			break;
 		case CreditScreen:
 		game.getcreditscreen().mouseReleased(e.getX(),e.getY());
+		break;
 		default:
 			break;
 		
