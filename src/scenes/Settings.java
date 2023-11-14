@@ -19,6 +19,7 @@ public class Settings extends GameScene implements SceneMethods {
 	public Settings(Game game) {
 		super(game);
 		initButtons();
+	///	creditScreen = new CreditScreen(null);
 	}
 
 	private void initButtons() {
@@ -26,12 +27,11 @@ public class Settings extends GameScene implements SceneMethods {
 		extra = new MyButton("Tutorial", 245, 150, 150, 50);
 	 	timer = new MyButton("Tempo", 245, 250, 150, 50);
 		pearson = new MyButton("Personagens", 245, 350, 150, 50);
-		credit = new MyButton("Créditos", 245, 450, 150, 50);
-	}
+		credit = new MyButton("Créditos", 245, 450, 150, 50);	}
 
 	@Override
 	public void render(Graphics g) {
-		g.setColor(Color.CYAN);
+		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, 640, 640);
 		drawButtons(g);
 		
@@ -50,6 +50,9 @@ public class Settings extends GameScene implements SceneMethods {
 	public void mouseClicked(int x, int y) {
 		if(bMainMenu.getBounds().contains(x, y)) {
 			SetGameState(MENU);
+		} else if(credit.getBounds().contains(x,y)){
+			SetGameState(CreditScreen);
+			game.getcreditscreen();
 		}
 		
 	}

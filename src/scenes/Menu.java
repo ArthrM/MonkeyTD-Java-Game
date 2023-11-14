@@ -1,5 +1,6 @@
 package scenes;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -45,11 +46,18 @@ public class Menu extends GameScene implements SceneMethods{
 
 	@Override
 	public void render(Graphics g) {
+		g.setColor(Color.BLACK); // Change the color as needed
+        g.fillRect(0, 0, 640, 640);
 		drawButtons(g);
 	}
 	
 	
 	private void drawButtons(Graphics g) {
+
+		g.setColor(Color.WHITE);
+        g.setFont(new Font("Arial", Font.BOLD, 20));
+        g.drawString("BEM VINDOS AO NOSSO JOGO!", 170, 100);
+      
 		g.setFont(new Font("Rockwell", Font.PLAIN, 15));
 		bPlaying.draw(g);
 		bEdit.draw(g);
