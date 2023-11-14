@@ -17,7 +17,7 @@ public class CreditScreen extends GameScene implements SceneMethods {
     }
 
     private void initButtons() {
-        bBack = new MyButton("Return", 10, 10, 150, 50);
+        bBack = new MyButton("VOLTAR", 10, 10, 150, 50);
     }
 
     @Override
@@ -25,9 +25,10 @@ public class CreditScreen extends GameScene implements SceneMethods {
         g.setColor(Color.BLACK); // Change the color as needed
         g.fillRect(0, 0, 640, 640);
         drawButtons(g);
+        drawText(g);
     }
 
-    public void drawButtons(Graphics g) {
+    public void drawText(Graphics g) {
         // Draw the credits text
         g.setColor(Color.WHITE);
         g.setFont(new Font("Arial", Font.BOLD, 20));
@@ -39,7 +40,9 @@ public class CreditScreen extends GameScene implements SceneMethods {
         g.drawString("-> Arthur José Silva Maluf", 190, 300);
         g.drawString("RA: 22005252", 250, 330);
         // Add more lines as needed
-    
+    }
+
+    public void drawButtons(Graphics g){
         // Draw the buttons
         g.setFont(new Font("Arial", Font.PLAIN, 15));
         bBack.draw(g);
@@ -57,7 +60,7 @@ public class CreditScreen extends GameScene implements SceneMethods {
     public void mouseMoved(int x, int y) {
         bBack.setMouseOver(false);
 
-        if(bBack.getBounds().contains(x,y)){
+        if(bBack.getBounds().contains(x, y)){
             bBack.setMouseOver(true);
         }
     }

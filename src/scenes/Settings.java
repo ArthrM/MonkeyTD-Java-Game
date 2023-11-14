@@ -34,7 +34,14 @@ public class Settings extends GameScene implements SceneMethods {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, 640, 640);
 		drawButtons(g);
-		
+		drawText(g);
+	}
+
+	public void drawText(Graphics g) {
+        // Draw the credits text
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("Arial", Font.BOLD, 20));
+        g.drawString("MENU DE OPÇÕES!!", 225, 95);
 	}
 	
 	public void drawButtons(Graphics g) {
