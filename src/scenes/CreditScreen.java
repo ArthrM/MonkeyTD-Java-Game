@@ -17,14 +17,14 @@ public class CreditScreen extends GameScene implements SceneMethods {
     public CreditScreen(Game game) {
         super(game);
         initButtons();
-        iniciarPiscar();
+    //    iniciarPiscar();
     }
 
     private void initButtons() {
         bBack = new MyButton("VOLTAR", 10, 10, 150, 50);
     }
 
-    // Inicia o efeito de piscar dos créditos usando um Timer.
+   /*  // Inicia o efeito de piscar dos créditos usando um Timer.
     private void iniciarPiscar() {
         Timer timer = new Timer(500, e -> {
             // Inverte o estado de visibilidade dos créditos.
@@ -39,14 +39,15 @@ public class CreditScreen extends GameScene implements SceneMethods {
         // método de repintura da tela
     }
 
+*/
     @Override
     public void render(Graphics g) {
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, 640, 780);
         drawButtons(g);
-        if (creditosVisiveis) {
+      //  if (creditosVisiveis) {
             drawText(g);
-        }
+        //}
     }
 
     public void drawText(Graphics g) {
