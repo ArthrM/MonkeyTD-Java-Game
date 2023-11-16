@@ -53,16 +53,21 @@ public class CreditScreen extends GameScene implements SceneMethods {
     public void drawText(Graphics g) {
         g.setColor(Color.WHITE);
         g.setFont(new Font("Arial", Font.BOLD, 20));
-        g.drawString("CRÉDITOS", 260, 50);
-        g.drawString("| ==== Participantes do Projeto ==== |", 135, 120);
+        g.drawString("CRÉDITOS", 260, 70);
+        g.drawString("(==== Participantes do Projeto ====)", 145, 200);
+        g.drawString("~~ Jogo em Java // Inspirado em Blloons ~~", 115, 130);
+        g.drawString("__________", 259, 72);
+        g.drawString("Obrigado por Jogar! :)", 220, 610);
+
+
 
         g.setFont(new Font("Arial", Font.PLAIN, 20));
-        g.drawString("-> Mattheus Gonçalves Anitelli", 180, 200);
-        g.drawString("RA: 22011982", 250, 230);
-        g.drawString("-> Arthur José Silva Maluf", 190, 300);
-        g.drawString("RA: 22005252", 250, 330);
-        g.drawString("Obrigado por Jogar! :)", 170, 600);
-        // Adicione mais linhas conforme necessário
+        g.drawString("-> Mattheus Gonçalves Anitelli: 22011982", 120, 270);
+        g.drawString("-> Arthur José Silva Maluf: 22005252", 120, 330);
+        g.drawString("-> Vinicius Barbosa: 22000267", 120, 400);
+        g.drawString("-> João Vitor Roventini: 22005168", 120, 460);
+        g.drawString("-> João Pedro Galo: 00000000", 120, 520);
+     
     }
 
     public void drawButtons(Graphics g) {
