@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 
 import helperMethods.LoadSave;
 import managers.TileManager;
+import scenes.CreditScreen;
 import scenes.Editing;
 import scenes.Menu;
 import scenes.Playing;
@@ -23,6 +24,7 @@ public class Game extends JFrame implements Runnable {
 	private Playing playing;
 	private Settings settings;
 	private Editing editing;
+	private CreditScreen creditScreen;
 	
 	private TileManager tileManager;
 
@@ -42,8 +44,17 @@ public class Game extends JFrame implements Runnable {
 		playing = new Playing(this);
 		settings = new Settings(this);
 		editing = new Editing(this);
+		creditScreen = new CreditScreen(this);
 		
 	}
+
+	public void showCreditsScreen() {
+        JFrame frame = new JFrame("Tela de Créditos");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().add(frame);
+        frame.pack();
+        frame.setVisible(true);
+    }
 
 	private void start() {
 		
@@ -64,6 +75,8 @@ public class Game extends JFrame implements Runnable {
 			playing.update();
 			break;
 		case SETTINGS:
+			break;
+		case CreditScreen:
 			break;
 		default:
 			break;
@@ -155,6 +168,10 @@ public class Game extends JFrame implements Runnable {
 	public TileManager getTileManager() {
 		return tileManager;
 	}
+
+    public CreditScreen getcreditscreen() {
+		return creditScreen;
+    }
 	
 	
 }

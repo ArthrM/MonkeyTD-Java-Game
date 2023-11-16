@@ -11,33 +11,56 @@ import static main.GameStates.*;
 public class Settings extends GameScene implements SceneMethods {
 
 	private MyButton bMainMenu;
+	private MyButton extra;
+	private MyButton timer;
+	private MyButton pearson;
+	private MyButton credit;
 	
 	public Settings(Game game) {
 		super(game);
 		initButtons();
+	///	creditScreen = new CreditScreen(null);
 	}
 
 	private void initButtons() {
-		bMainMenu = new MyButton("Save & Return", 280, 500, 110, 25);
-	}
+		bMainMenu = new MyButton("Save & Return", 10, 10, 150, 50);
+		extra = new MyButton("Tutorial", 245, 150, 150, 50);
+	 	timer = new MyButton("Tempo", 245, 250, 150, 50);
+		pearson = new MyButton("Personagens", 245, 350, 150, 50);
+		credit = new MyButton("Créditos", 245, 450, 150, 50);	}
 
 	@Override
 	public void render(Graphics g) {
-		g.setColor(Color.BLUE);
-		g.fillRect(0, 0, 640, 640);
+		g.setColor(Color.BLACK);
+		g.fillRect(0, 0, 640, 780);
 		drawButtons(g);
-		
+		drawText(g);
+	}
+
+	public void drawText(Graphics g) {
+        // Draw the credits text
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("Arial", Font.BOLD, 20));
+        g.drawString("MENU DE OPÇÕES!!", 225, 95);
+		g.drawString("__________________", 225,97);
 	}
 	
 	public void drawButtons(Graphics g) {
-		g.setFont(new Font("Rockwell", Font.PLAIN, 15));
+		g.setFont(new Font("Arial", Font.PLAIN, 15));
 		bMainMenu.draw(g);
+		extra.draw(g);
+		timer.draw(g);
+		pearson.draw(g);
+		credit.draw(g);
 	}
 
 	@Override
 	public void mouseClicked(int x, int y) {
 		if(bMainMenu.getBounds().contains(x, y)) {
 			SetGameState(MENU);
+		} else if(credit.getBounds().contains(x,y)){
+			SetGameState(CreditScreen);
+			game.getcreditscreen();
 		}
 		
 	}
@@ -45,9 +68,21 @@ public class Settings extends GameScene implements SceneMethods {
 	@Override
 	public void mouseMoved(int x, int y) {
 		bMainMenu.setMouseOver(false);
+		extra.setMouseOver(false);
+		timer.setMouseOver(false);
+		pearson.setMouseOver(false);
+		credit.setMouseOver(false);
 		
 		if(bMainMenu.getBounds().contains(x, y)) {
 			bMainMenu.setMouseOver(true);
+		} else if(extra.getBounds().contains(x, y)) {
+			extra.setMouseOver(true);
+		} else if(timer.getBounds().contains(x, y)) {
+			timer.setMouseOver(true);
+		} else if(pearson.getBounds().contains(x,y)){
+			pearson.setMouseOver(true);
+		} else if(credit.getBounds().contains(x,y)){
+			credit.setMouseOver(true);
 		}
 		
 	}
@@ -57,6 +92,14 @@ public class Settings extends GameScene implements SceneMethods {
 		
 		if(bMainMenu.getBounds().contains(x, y)) {
 			bMainMenu.setMousePressed(true);
+		} else if(extra.getBounds().contains(x,y)){
+			extra.setMousePressed(true);
+		} else if(timer.getBounds().contains(x,y)){
+			timer.setMousePressed(true);
+		} else if(pearson.getBounds().contains(x,y)){
+			pearson.setMousePressed(true);
+		} else if(credit.getBounds().contains(x,y)){
+			credit.setMousePressed(true);
 		}
 		
 	}
@@ -76,7 +119,10 @@ public class Settings extends GameScene implements SceneMethods {
 	
 	private void resetButtons() {
 		bMainMenu.resetBooleans();
-		
+		extra.resetBooleans();
+		timer.resetBooleans();
+		pearson.resetBooleans();
+		credit.resetBooleans();
 	}
 
 }

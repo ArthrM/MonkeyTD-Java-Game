@@ -42,4 +42,8 @@ public class GameScene {
 		return getGame().getTileManager().getAniSprite(spriteID,animationIndex);
 	}
 
+
+    public static void showSettings() {
+    }
+
 }
