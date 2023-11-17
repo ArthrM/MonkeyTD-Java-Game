@@ -6,6 +6,7 @@ package ui;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.text.DecimalFormat;
 
 import helperMethods.Constants.Monkeys;
 import objects.Monkey;
@@ -19,9 +20,12 @@ public class ActionBar extends Bar{
 	private Monkey selectedMonkey;
 	private Monkey displayedMonkey;
 	
+	private DecimalFormat formater;
+	
 	public ActionBar(int x, int y , int width , int height, Playing playing) {
 		super(x, y, width, height);
 		this.playing = playing;
+		formater = new DecimalFormat("0.0");
 		
 		initButtons();
 	}
@@ -50,6 +54,32 @@ public class ActionBar extends Bar{
 		
 		drawDisplayedMonkey(g);
 		
+		drawWaveInfo(g);
+		
+	}
+
+	private void drawWaveInfo(Graphics g) {
+		g.setColor(Color.black);
+		g.setFont(new Font("Rockwell", Font.BOLD, 13));
+		
+		drawWaveTimerInfo(g);
+		drawWavesLeftInfo(g);
+		
+	}
+	
+	private void drawWavesLeftInfo(Graphics g) {
+		int current = playing.getWaveManager().getWaveIndex();
+		int size = playing.getWaveManager().getWaves().size();
+		g.drawString("Wave " + (current + 1) + " / " + size, 475, 762);
+		
+	}
+
+	private void drawWaveTimerInfo(Graphics g) {
+		if(playing.getWaveManager().isWaveTimerStarted()) {
+			float timeLeft = playing.getWaveManager().getTimeLeft();
+			String formatedText = formater.format(timeLeft);
+			g.drawString("Próxima ronda em " + formatedText + " segundos", 415, 745);
+		}
 	}
 
 	private void drawDisplayedMonkey(Graphics g) {

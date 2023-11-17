@@ -13,6 +13,7 @@ import main.Game;
 import managers.BloonManager;
 import managers.MonkeyManager;
 import managers.ProjectileManager;
+import managers.WaveManager;
 import objects.Monkey;
 import objects.PathPoint;
 import ui.MyButton;
@@ -29,9 +30,12 @@ public class Playing extends GameScene implements SceneMethods{
 	private BloonManager bloonManager;
 	private MonkeyManager monkeyManager;
 	private ProjectileManager projManager;
+	private WaveManager waveManager;
+	
 	private boolean drawSelect = false;
 	private boolean isMouseDragging = false;
 	private boolean isMousePressed = false;
+	
 	private PathPoint start, end;
 	private Monkey selectedMonkey;
 	
@@ -44,6 +48,7 @@ public class Playing extends GameScene implements SceneMethods{
 		bloonManager = new BloonManager(this, start, end);
 		monkeyManager = new MonkeyManager(this);
 		projManager = new ProjectileManager(this);
+		waveManager = new WaveManager(this);
 	}
 	
 	private void loadDefaultLevel() {
@@ -67,9 +72,63 @@ public class Playing extends GameScene implements SceneMethods{
 	public void update() {
 		
 		updateTick();
+		waveManager.update();
+		
+		if(areAllEnemiesDead()) {
+			if(areThereMoreWaves()) {
+				waveManager.startWaveTimer();
+				if(isWaveTimeOver()) {
+					waveManager.increaseWaveIndex();
+					bloonManager.getBloons().clear();
+					waveManager.resetBloonIndex();
+				}
+				
+			}
+		}
+		
+		if(isTimeForNewBloon()) {
+			spawnBloon();
+		}
+		
 		bloonManager.update();
 		monkeyManager.update();
 		projManager.update();
+	}
+	
+	private boolean isWaveTimeOver() {
+		
+		return waveManager.isWaveTimerOver();
+	}
+
+	private boolean areThereMoreWaves() {
+		
+		return waveManager.areThereMoreWaves();
+	}
+
+	private boolean areAllEnemiesDead() {
+		
+		if(waveManager.isThereMoreBloonsInWave()) {
+			return false;
+		}
+		
+		for(Bloon bl : bloonManager.getBloons())
+			if(bl.isAlive())
+				return false;
+		
+		return true;
+	}
+
+	private void spawnBloon() {
+		bloonManager.spawnBloon(waveManager.getNextBloon());
+	}
+
+	private boolean isTimeForNewBloon() {
+		if(waveManager.isTimeForNewBloon()) {
+			if(waveManager.isThereMoreBloonsInWave())
+				return true;
+		}
+		
+		return false;
 	}
 	
 	public void setSelectedMonkey(Monkey selectedMonkey) {
@@ -83,15 +142,26 @@ public class Playing extends GameScene implements SceneMethods{
 		
 		drawLevel(g);
 		drawButtons(g);
+		
+		drawHighLight(g);
+		drawSelectedMonkey(g);
+		
 		bloonManager.draw(g);
+		actionBar.draw(g);
+		
+		drawWaveInfos(g);
+		
 		monkeyManager.draw(g);
 		projManager.draw(g);
-		actionBar.draw(g);
-		drawSelectedMonkey(g);
-		drawHighLight(g);
+		
 
 	}
 	
+	private void drawWaveInfos(Graphics g) {
+		
+		
+	}
+
 	private void drawHighLight(Graphics g) {
 		
 			g.setColor(Color.LIGHT_GRAY);
@@ -168,6 +238,10 @@ public class Playing extends GameScene implements SceneMethods{
 		return bloonManager;
 	}
 	
+	public WaveManager getWaveManager() {
+		return waveManager;
+	}
+	
 	private Monkey getMonkeyAt(int x, int y) {
 		return monkeyManager.getMonkeyAt(x, y);
 	}
@@ -178,6 +252,11 @@ public class Playing extends GameScene implements SceneMethods{
 		int tileType = game.getTileManager().getTile(id).getTileType();
 		
 		return tileType == helperMethods.Constants.Monkeys.GetPlaceableTile(selectedMonkey.getMonkeyType());
+	}
+	
+	public void shootBloon(Monkey m, Bloon bl) {
+		projManager.newProjecile(m, bl);
+		
 	}
 	
 	@Override
@@ -261,10 +340,7 @@ public class Playing extends GameScene implements SceneMethods{
 		
 	}
 
-	public void shootBloon(Monkey m, Bloon bl) {
-		projManager.newProjecile(m, bl);
-		
-	}
+
 
 
 

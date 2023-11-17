@@ -35,6 +35,13 @@ public abstract class Bloon {
 			alive = false;
 	}
 	
+	public void kill() {
+		//Para estourar o balao QUANDO CHEGA NO FINAL
+		alive = false;
+		health = 0;
+		
+	}
+	
 	public void slow() {
 		slowTick = 0;
 	}

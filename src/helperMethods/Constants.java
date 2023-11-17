@@ -86,7 +86,7 @@ public class Constants {
 			case PIRATE_M:
 				return 25;
 			case DIO_M:
-				return 15;
+				return 1000;
 			}
 			
 			return 0;
@@ -175,13 +175,13 @@ public class Constants {
 		public static int GetStartHealth(int bloonType) {
 			switch(bloonType) {
 			case RED_BL:
-				return 150;
+				return 50;
 			case BLUE_BL:
-				return 150;
+				return 50;
 			case GREEN_BL:
-				return 120;
+				return 50;
 			case YELLOW_BL:
-				return 125;
+				return 50;
 			}
 			
 			return 0;

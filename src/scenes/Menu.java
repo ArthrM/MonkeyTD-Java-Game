@@ -56,9 +56,10 @@ public class Menu extends GameScene implements SceneMethods{
 	private void drawText(Graphics g) {
 
 		g.setColor(Color.WHITE);
-        g.setFont(new Font("Arial", Font.BOLD, 20));
-        g.drawString("BEM VINDOS AO NOSSO JOGO!", 170, 100);
-		g.drawString("APROVEITEM!! :)", 240, 600);
+		g.setFont(new Font("Rockwell", Font.BOLD, 20));
+        g.drawString("Monkey.java", 255, 100);
+        g.setFont(new Font("Arial", Font.BOLD, 14));
+		g.drawString("Todos os direitos reservados à NinjaKiwi e a BloonsTD", 140, 600);
 	}
 
 	private void drawButtons(Graphics g){

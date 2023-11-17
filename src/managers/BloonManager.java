@@ -30,10 +30,10 @@ public class BloonManager {
 		this.start = start;
 		this.end = end;
 		loadEffectImg();
-		addBloon(RED_BL);
+/*		addBloon(RED_BL);
 		addBloon(BLUE_BL);
 		addBloon(GREEN_BL);
-		addBloon(YELLOW_BL);
+		addBloon(YELLOW_BL);*/
 		loadBloonImgs();
 	}
 	
@@ -50,13 +50,15 @@ public class BloonManager {
 	}
 
 	public void update() {
+	
 		for (Bloon bl : bloons) {
 			if(bl.isAlive())
-				updateBloonMove(bl);
+				updateBloonMove(bl);	
 		}
 
 	}
 	
+
 	public void updateBloonMove(Bloon bl) {
 		//Posição do bloon
 		//Direção do bloon
@@ -71,8 +73,8 @@ public class BloonManager {
 			//Continua movendo na mesma direção
 			bl.move(GetSpeed(bl.getBloonType()), bl.getLastDir());
 		}else if(isAtEnd(bl)) {
-			//Chegou no fim do percurso
-			System.out.println("Lives lost");
+			bl.kill();
+			System.out.println("Lives lost!!!");
 		}else {
 			//Acha nova direção
 			setNewDirectionAndMove(bl);
@@ -158,6 +160,11 @@ public class BloonManager {
 		return 0;
 	}
 
+	public void spawnBloon(int nextBloon) {
+		addBloon(nextBloon);
+		
+	}
+	
 	public void addBloon(int enemyType) {
 		
 		int x = start.getxCord() * 32;
@@ -201,4 +208,6 @@ public class BloonManager {
 	public ArrayList<Bloon> getBloons() {
 		return bloons;
 	}
+
+
 }

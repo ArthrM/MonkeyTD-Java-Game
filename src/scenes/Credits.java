@@ -9,22 +9,22 @@ import ui.MyButton;
 import static main.GameStates.SETTINGS;
 import static main.GameStates.SetGameState;
 
-public class CreditScreen extends GameScene implements SceneMethods {
+public class Credits extends GameScene implements SceneMethods {
 
     private MyButton bBack;
-    private boolean creditosVisiveis;
+    private boolean areCreditsVisible;
 
-    public CreditScreen(Game game) {
+    public Credits(Game game) {
         super(game);
         initButtons();
-    //    iniciarPiscar();
+    //  iniciarPiscar();
     }
 
     private void initButtons() {
         bBack = new MyButton("VOLTAR", 10, 10, 150, 50);
     }
 
-   /*  // Inicia o efeito de piscar dos créditos usando um Timer.
+/*          // Inicia o efeito de piscar dos créditos usando um Timer.
     private void iniciarPiscar() {
         Timer timer = new Timer(500, e -> {
             // Inverte o estado de visibilidade dos créditos.
@@ -45,28 +45,26 @@ public class CreditScreen extends GameScene implements SceneMethods {
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, 640, 780);
         drawButtons(g);
-      //  if (creditosVisiveis) {
+      //  if (areCreditsVisible) {
             drawText(g);
-        //}
+      //  }
     }
 
     public void drawText(Graphics g) {
         g.setColor(Color.WHITE);
-        g.setFont(new Font("Arial", Font.BOLD, 20));
+        g.setFont(new Font("Rockwell", Font.BOLD, 20));
         g.drawString("CRÉDITOS", 260, 70);
-        g.drawString("(==== Participantes do Projeto ====)", 145, 200);
-        g.drawString("~~ Jogo em Java // Inspirado em Blloons ~~", 115, 130);
-        g.drawString("__________", 259, 72);
-        g.drawString("Obrigado por Jogar! :)", 220, 610);
-
-
+        g.drawString("Participantes do Projeto", 210, 200);
+        g.drawString("Jogo em Java // Inspirado em BloonsTD", 115, 130);
+        g.drawString("__________", 256, 72);
+        g.drawString("PI: Programação Orientada à Objeto", 220, 610);
 
         g.setFont(new Font("Arial", Font.PLAIN, 20));
-        g.drawString("-> Mattheus Gonçalves Anitelli: 22011982", 120, 270);
-        g.drawString("-> Arthur José Silva Maluf: 22005252", 120, 330);
-        g.drawString("-> Vinicius Barbosa: 22000267", 120, 400);
-        g.drawString("-> João Vitor Roventini: 22005168", 120, 460);
-        g.drawString("-> João Pedro Galo: 00000000", 120, 520);
+        g.drawString("Arthur José Silva Maluf - 22005252", 125, 270);
+        g.drawString("João Pedro Galo - 00000000", 125, 330);
+        g.drawString("João Vitor Roventini - 22005168", 125, 390);
+        g.drawString("Mattheus Gonçalves Anitelli - 22011982", 125, 450);
+        g.drawString("Vinicius Barbosa - 22000267", 125, 510);
      
     }
 

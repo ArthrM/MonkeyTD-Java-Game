@@ -40,8 +40,8 @@ public class Render {
 			game.getEditor().render(g);
 			
 			break;
-		case CreditScreen:
-			game.getcreditscreen().render(g);
+		case CREDITS:
+			game.getCredits().render(g);
 			
 		default:
 			break;
