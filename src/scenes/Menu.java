@@ -4,14 +4,19 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 import main.Game;
+import main.sounds;
 import ui.MyButton;
 import static main.GameStates.*;
 
@@ -21,11 +26,14 @@ public class Menu extends GameScene implements SceneMethods{
 //	private ArrayList<BufferedImage> sprites = new ArrayList<>();
 	private Random random;
 	private MyButton bPlaying, bEdit, bSettings, bQuit;
+	private Clip menuSoundClip; // Adiciona um membro para armazenar o Clip do som
 	
 	public Menu(Game game) {
 		super(game);
 		initButtons();
 		random = new Random();
+
+		playMenuSound();
 //		importImg();
 //		loadSprites();
 		
@@ -97,6 +105,33 @@ public class Menu extends GameScene implements SceneMethods{
 	}
  */	
 	
+private void playMenuSound() {
+	sounds.playMenuSound("c:/Users/matta/Downloads/Title Music (Party Time).wav");
+
+        try {
+            File arquivoSom = new File("c:/Users/matta/Downloads/Title Music (Party Time).wav");
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(arquivoSom);
+
+            menuSoundClip = AudioSystem.getClip();
+            menuSoundClip.open(audioInputStream);
+            menuSoundClip.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+	@Override
+public void finalize() {
+    stopMenuSound();
+}
+
+private void stopMenuSound() {
+    if (menuSoundClip != null && menuSoundClip.isRunning()) {
+        menuSoundClip.stop();
+        menuSoundClip.close();
+    }
+}
+
 	@Override
 	public void mouseClicked(int x, int y) {
 		
@@ -134,6 +169,7 @@ public class Menu extends GameScene implements SceneMethods{
 	public void mousePressed(int x, int y) {
 		if(bPlaying.getBounds().contains(x, y)) {
 			bPlaying.setMousePressed(true);
+			stopMenuSound();
 		} else if (bEdit.getBounds().contains(x, y)){
 			bEdit.setMousePressed(true);
 		} else if (bSettings.getBounds().contains(x, y)) {

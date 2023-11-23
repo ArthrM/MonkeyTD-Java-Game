@@ -57,16 +57,16 @@ public class CreditScreen extends GameScene implements SceneMethods {
         g.drawString("(==== Participantes do Projeto ====)", 145, 200);
         g.drawString("~~ Jogo em Java // Inspirado em Blloons ~~", 115, 130);
         g.drawString("__________", 259, 72);
-        g.drawString("Obrigado por Jogar! :)", 220, 610);
+        g.drawString("Obrigado por Jogar! :)", 220, 600);
 
 
 
         g.setFont(new Font("Arial", Font.PLAIN, 20));
         g.drawString("-> Mattheus Gonçalves Anitelli: 22011982", 120, 270);
         g.drawString("-> Arthur José Silva Maluf: 22005252", 120, 330);
-        g.drawString("-> Vinicius Barbosa: 22000267", 120, 400);
-        g.drawString("-> João Vitor Roventini: 22005168", 120, 460);
-        g.drawString("-> João Pedro Galo: 00000000", 120, 520);
+        g.drawString("-> Vinicius Barbosa: 22000267", 120, 390);
+        g.drawString("-> João Vitor Roventini: 22005168", 120, 450);
+        g.drawString("-> João Pedro Galo: 22017668", 120, 510);
      
     }
 

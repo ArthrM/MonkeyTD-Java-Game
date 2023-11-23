@@ -8,6 +8,11 @@ import scenes.CreditScreen;
 import scenes.Editing;
 import scenes.Menu;
 import scenes.Playing;
+
+import java.io.File;
+import java.util.Scanner;
+import java.io.IOException;
+import javax.sound.sampled.*;
 import scenes.Settings;
 
 public class Game extends JFrame implements Runnable {
@@ -88,7 +93,7 @@ public class Game extends JFrame implements Runnable {
 		Game game = new Game();
 		game.gamePanel.initInputs();
 		game.start();
-		
+
 	}
 
 	private void createDefaultLevel() {
