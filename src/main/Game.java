@@ -4,7 +4,9 @@ import javax.swing.JFrame;
 
 import helperMethods.LoadSave;
 import managers.TileManager;
+import scenes.Credits;
 import scenes.Editing;
+import scenes.GameOver;
 import scenes.Menu;
 import scenes.Playing;
 import scenes.Settings;
@@ -23,6 +25,8 @@ public class Game extends JFrame implements Runnable {
 	private Playing playing;
 	private Settings settings;
 	private Editing editing;
+	private Credits credits;
+	private GameOver gameOver;
 	
 	private TileManager tileManager;
 
@@ -42,8 +46,18 @@ public class Game extends JFrame implements Runnable {
 		playing = new Playing(this);
 		settings = new Settings(this);
 		editing = new Editing(this);
+		credits = new Credits(this);
+		gameOver = new GameOver(this);
 		
 	}
+
+	public void showCreditsScreen() {
+        JFrame frame = new JFrame("Tela de Créditos");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().add(frame);
+        frame.pack();
+        frame.setVisible(true);
+    }
 
 	private void start() {
 		
@@ -64,6 +78,8 @@ public class Game extends JFrame implements Runnable {
 			playing.update();
 			break;
 		case SETTINGS:
+			break;
+		case CREDITS:
 			break;
 		default:
 			break;
@@ -143,7 +159,6 @@ public class Game extends JFrame implements Runnable {
 		return playing;
 	}
 
-
 	public Settings getSettings() {
 		return settings;
 	}
@@ -152,8 +167,16 @@ public class Game extends JFrame implements Runnable {
 		return editing;
 	}
 
+	public Credits getCredits() {
+		return credits;
+	}
+	
 	public TileManager getTileManager() {
 		return tileManager;
+	}
+
+	public GameOver getGameOver() {
+		return gameOver;
 	}
 	
 	

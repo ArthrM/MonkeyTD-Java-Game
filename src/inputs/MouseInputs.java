@@ -30,6 +30,12 @@ public class MouseInputs implements MouseListener,MouseMotionListener {
 		case EDIT:
 			game.getEditor().mouseDragged(e.getX(),e.getY());
 			break;
+		case CREDITS: 
+			game.getCredits().mouseDragged(e.getX(),e.getY());
+			break;
+		case GAMEOVER:
+			game.getGameOver().mouseDragged(e.getX(), e.getY());
+			break;
 		default:
 			break;
 		
@@ -43,16 +49,22 @@ public class MouseInputs implements MouseListener,MouseMotionListener {
 		
 		switch(GameStates.gameState) {
 		case MENU:
-			game.getMenu().mouseMoved(e.getX(),e.getY());
+			game.getMenu().mouseMoved(e.getX(), e.getY());
 			break;
 		case PLAYING:
-			game.getPlaying().mouseMoved(e.getX(),e.getY());
+			game.getPlaying().mouseMoved(e.getX(), e.getY());
 			break;
 		case EDIT:
-			game.getEditor().mouseMoved(e.getX(),e.getY());
+			game.getEditor().mouseMoved(e.getX(), e.getY());
 			break;
 		case SETTINGS:
-			game.getSettings().mouseMoved(e.getX(),e.getY());
+			game.getSettings().mouseMoved(e.getX(), e.getY());
+			break;
+		case CREDITS: 
+			game.getCredits().mouseMoved(e.getX(), e.getY());
+			break;
+		case GAMEOVER:
+			game.getGameOver().mouseMoved(e.getX(), e.getY());
 			break;
 		default:
 			break;
@@ -68,24 +80,32 @@ public class MouseInputs implements MouseListener,MouseMotionListener {
 			
 			switch(GameStates.gameState) {
 			case MENU:
-				game.getMenu().mouseClicked(e.getX(),e.getY());
+				game.getMenu().mouseClicked(e.getX(), e.getY());
 				break;
 			case PLAYING:
-			   	game.getPlaying().mouseClicked(e.getX(),e.getY());
+			   	game.getPlaying().mouseClicked(e.getX(), e.getY());
 				break;
 			case EDIT:
 				game.getEditor().mouseClicked(e.getX(), e.getY());
 				break;
 			case SETTINGS:
-				game.getSettings().mouseClicked(e.getX(),e.getY());
+				game.getSettings().mouseClicked(e.getX(), e.getY());
+				break;
+			case CREDITS:
+				game.getCredits().mouseClicked(e.getX(), e.getY());
+				break;
+			case GAMEOVER:
+				game.getGameOver().mouseClicked(e.getX(), e.getY());
 				break;
 			default:
 				break;
 			
 			}
 		}
-			
 		
+		if(e.getButton() == MouseEvent.BUTTON3) {
+			game.getPlaying().mouse2Clicked(e.getX(), e.getY());
+		}
 	}
 
 	@Override
@@ -93,16 +113,22 @@ public class MouseInputs implements MouseListener,MouseMotionListener {
 		
 		switch(GameStates.gameState) {
 		case MENU:
-			game.getMenu().mousePressed(e.getX(),e.getY());
+			game.getMenu().mousePressed(e.getX(), e.getY());
 			break;
 		case PLAYING:
-			game.getPlaying().mousePressed(e.getX(),e.getY());
+			game.getPlaying().mousePressed(e.getX(), e.getY());
 			break;
 		case EDIT:
-			game.getEditor().mousePressed(e.getX(),e.getY());
+			game.getEditor().mousePressed(e.getX(), e.getY());
 			break;
 		case SETTINGS:
-			game.getSettings().mousePressed(e.getX(),e.getY());
+			game.getSettings().mousePressed(e.getX(), e.getY());
+			break;
+		case CREDITS:
+			game.getCredits().mousePressed(e.getX(), e.getY());
+			break;
+		case GAMEOVER:
+			game.getGameOver().mousePressed(e.getX(), e.getY());
 			break;
 		default:
 			break;
@@ -114,16 +140,22 @@ public class MouseInputs implements MouseListener,MouseMotionListener {
 	public void mouseReleased(MouseEvent e) {
 		switch(GameStates.gameState) {
 		case MENU:
-			game.getMenu().mouseReleased(e.getX(),e.getY());
+			game.getMenu().mouseReleased(e.getX(), e.getY());
 			break;
 		case PLAYING:
-			game.getPlaying().mouseReleased(e.getX(),e.getY());
+			game.getPlaying().mouseReleased(e.getX(), e.getY());
 			break;
 		case EDIT:
-			game.getEditor().mouseReleased(e.getX(),e.getY());
+			game.getEditor().mouseReleased(e.getX(), e.getY());
 			break;
 		case SETTINGS:
-			game.getSettings().mouseReleased(e.getX(),e.getY());
+			game.getSettings().mouseReleased(e.getX(), e.getY());
+			break;
+		case CREDITS:
+			game.getCredits().mouseReleased(e.getX(), e.getY());
+			break;
+		case GAMEOVER:
+			game.getGameOver().mouseReleased(e.getX(), e.getY());
 			break;
 		default:
 			break;

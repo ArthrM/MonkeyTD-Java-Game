@@ -1,5 +1,6 @@
 package scenes;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -19,7 +20,6 @@ public class Menu extends GameScene implements SceneMethods{
 //	private BufferedImage img;
 //	private ArrayList<BufferedImage> sprites = new ArrayList<>();
 	private Random random;
-	
 	private MyButton bPlaying, bEdit, bSettings, bQuit;
 	
 	public Menu(Game game) {
@@ -46,12 +46,23 @@ public class Menu extends GameScene implements SceneMethods{
 
 	@Override
 	public void render(Graphics g) {
-		
+		g.setColor(Color.BLACK); // Change the color as needed
+        g.fillRect(0, 0, 640, 780);
 		drawButtons(g);
+		drawText(g);
 	}
 	
 	
-	private void drawButtons(Graphics g) {
+	private void drawText(Graphics g) {
+
+		g.setColor(Color.WHITE);
+		g.setFont(new Font("Rockwell", Font.BOLD, 20));
+        g.drawString("Monkey.java", 255, 100);
+        g.setFont(new Font("Arial", Font.BOLD, 14));
+		g.drawString("Todos os direitos reservados à NinjaKiwi e a BloonsTD", 140, 600);
+	}
+
+	private void drawButtons(Graphics g){
 		g.setFont(new Font("Rockwell", Font.PLAIN, 15));
 		bPlaying.draw(g);
 		bEdit.draw(g);
@@ -91,6 +102,7 @@ public class Menu extends GameScene implements SceneMethods{
 	public void mouseClicked(int x, int y) {
 		
 		if(bPlaying.getBounds().contains(x, y)) {
+			game.getPlaying().setGamePaused(false);
 			SetGameState(PLAYING);
 		} else if (bEdit.getBounds().contains(x, y)) {
 			SetGameState(EDIT);

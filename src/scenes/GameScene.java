@@ -15,7 +15,6 @@ public class GameScene {
 		this.game = game;
 	}
 
-	
 	public Game getGame() {
 		return game;
 	}
@@ -41,5 +40,9 @@ public class GameScene {
 	protected BufferedImage getSprite(int spriteID, int animationIndex) {
 		return getGame().getTileManager().getAniSprite(spriteID,animationIndex);
 	}
+
+
+    public static void showSettings() {
+    }
 
 }

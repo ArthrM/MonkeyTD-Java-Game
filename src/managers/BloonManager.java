@@ -10,6 +10,7 @@ import Bloons.GreenBloon;
 import Bloons.RedBloon;
 import Bloons.YellowBloon;
 import helperMethods.LoadSave;
+import objects.Monkey;
 import objects.PathPoint;
 import scenes.Playing;
 import static helperMethods.Constants.Direction.*;
@@ -21,21 +22,22 @@ public class BloonManager {
 	private Playing playing;
 	private BufferedImage[] bloonImgs;
 	private ArrayList<Bloon> bloons = new ArrayList<>();
-//	private float speed = 0.5f;
 	private PathPoint start, end;
+	private BufferedImage slowEffect;
 	
 	public BloonManager(Playing playing, PathPoint start, PathPoint end) {
 		this.playing = playing;
 		bloonImgs = new BufferedImage[10];
 		this.start = start;
 		this.end = end;
-		addBloon(RED_BL);
-		addBloon(BLUE_BL);
-		addBloon(GREEN_BL);
-		addBloon(YELLOW_BL);
+		loadEffectImg();
 		loadBloonImgs();
 	}
 	
+	private void loadEffectImg() {
+		slowEffect = LoadSave.getSpriteAtlas().getSubimage(32 * 2, 32 * 7, 32, 32);
+	}
+
 	private void loadBloonImgs() {
 		
 		BufferedImage atlas = LoadSave.getSpriteAtlas();
@@ -45,13 +47,15 @@ public class BloonManager {
 	}
 
 	public void update() {
+	
 		for (Bloon bl : bloons) {
 			if(bl.isAlive())
-				updateBloonMove(bl);
+				updateBloonMove(bl);	
 		}
 
 	}
 	
+
 	public void updateBloonMove(Bloon bl) {
 		//Posição do bloon
 		//Direção do bloon
@@ -66,8 +70,8 @@ public class BloonManager {
 			//Continua movendo na mesma direção
 			bl.move(GetSpeed(bl.getBloonType()), bl.getLastDir());
 		}else if(isAtEnd(bl)) {
-			//Chegou no fim do percurso
-			System.out.println("Lives lost");
+			bl.kill();
+			playing.removeOneLife();
 		}else {
 			//Acha nova direção
 			setNewDirectionAndMove(bl);
@@ -153,23 +157,28 @@ public class BloonManager {
 		return 0;
 	}
 
-	public void addBloon(int enemyType) {
+	public void spawnBloon(int nextBloon) {
+		addBloon(nextBloon);
+	}
+	
+	
+	public void addBloon(int bloonType) {
 		
 		int x = start.getxCord() * 32;
 		int y = start.getyCord() * 32;
 		
-		switch(enemyType) {
+		switch(bloonType) {
 		case RED_BL:
-			bloons.add(new RedBloon(x, y, 0));
+			bloons.add(new RedBloon(x, y, 0, this));
 			break;
 		case BLUE_BL:
-			bloons.add(new BlueBloon(x, y, 0));
+			bloons.add(new BlueBloon(x, y, 0, this));
 			break;
 		case GREEN_BL:
-			bloons.add(new GreenBloon(x, y, 0));
+			bloons.add(new GreenBloon(x, y, 0, this));
 			break;
 		case YELLOW_BL:
-			bloons.add(new YellowBloon(x, y, 0));
+			bloons.add(new YellowBloon(x, y, 0, this));
 			break;
 		}
 	}
@@ -178,7 +187,14 @@ public class BloonManager {
 		for(Bloon bl : bloons)
 			if(bl.isAlive()) {
 				drawBloon(bl, g);
+				drawEffects(bl, g);
 			}
+	}
+
+	private void drawEffects(Bloon bl, Graphics g) {
+		if(bl.isSlowed())
+			g.drawImage(slowEffect, (int) bl.getX(), (int) bl.getY(), null);
+		
 	}
 
 	private void drawBloon(Bloon bl, Graphics g) {
@@ -189,4 +205,14 @@ public class BloonManager {
 	public ArrayList<Bloon> getBloons() {
 		return bloons;
 	}
+
+	public void rewardPlayer(int bloonType) {
+		playing.rewardPlayer(bloonType);
+		
+	}
+
+	public void reset() {
+		bloons.clear();
+	}
+
 }

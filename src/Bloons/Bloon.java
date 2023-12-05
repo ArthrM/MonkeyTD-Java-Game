@@ -1,10 +1,14 @@
 package Bloons;
 
 import java.awt.Rectangle;
+
+import managers.BloonManager;
+
 import static helperMethods.Constants.Direction.*;
 
 public abstract class Bloon {
 
+	protected BloonManager bloonManager;
 	protected float x, y;
 	protected Rectangle bounds;
 	protected int health;
@@ -12,30 +16,51 @@ public abstract class Bloon {
 	protected int bloonType;
 	protected int lastDir;
 	protected boolean alive = true;
+	protected int slowTickLimit = 60 * 4, slowTick = slowTickLimit;
 	
 	
-	public Bloon(float x, float y, int ID, int bloonType) {
+	public Bloon(float x, float y, int ID, int bloonType, BloonManager bloonManager) {
 		this.x = x;
 		this.y = y;
 		this.ID = ID;
 		this.bloonType = bloonType;
+		this.bloonManager = bloonManager;
 		bounds = new Rectangle((int) x , (int) y, 32 ,32);
 		lastDir = -1;
-		setStartHealth();
+		setStartHealth(bloonType);
 	}
 	
-	private void setStartHealth() {
+	private void setStartHealth(int bloonType) {
 		health = helperMethods.Constants.Bloons.GetStartHealth(bloonType);
 	}
 	
 	public void hurt(int dmg) {
 		this.health -= dmg;
-		if(health <= 0)
+		if(health <= 0) {
 			alive = false;
+			bloonManager.rewardPlayer(bloonType);
+		}
+	}
+	
+	public void kill() {
+		//Para estourar o balao QUANDO CHEGA NO FINAL
+		alive = false;
+		health = 0;
+		
+	}
+	
+	public void slow() {
+		slowTick = 0;
 	}
 	
 	public void move(float speed, int dir) {
 		lastDir = dir;
+		
+		if(slowTick < slowTickLimit) {
+			slowTick ++;
+			speed *= 0.4f;
+		}
+		
 		switch(dir) {
 		case LEFT:
 			this.x -= speed;
@@ -96,5 +121,9 @@ public abstract class Bloon {
 	
 	public boolean isAlive() {
 		return alive;
+	}
+	
+	public boolean isSlowed() {
+		return slowTick < slowTickLimit;
 	}
 }
