@@ -21,7 +21,7 @@ public class ActionBar extends Bar{
 	
 	private DecimalFormat formater;
 	
-	private int gold = 5000;
+	private int gold = 150;
 	private boolean showMonkeyCost;
 	private int monkeyCostType;
 	
@@ -39,7 +39,7 @@ public class ActionBar extends Bar{
 		lives = 25;
 		monkeyCostType = 0;
 		showMonkeyCost = false;
-		gold = 125;
+		gold = 200;
 		selectedMonkey = null;
 		displayedMonkey = null;
 	}

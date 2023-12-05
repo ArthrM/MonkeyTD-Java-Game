@@ -1,6 +1,7 @@
 package managers;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -95,9 +96,12 @@ public class MonkeyManager {
 	public void draw(Graphics g) {
 		
 		for(Monkey m : monkeys) {
-			if(m.getMonkeyType() == PIRATE_M)
-				g.drawImage(pirateShip,m.getX()-3,m.getY()+3,null);
+			
+			if(m.getMonkeyType() == PIRATE_M) {
+				g.drawImage(pirateShip, m.getX()-3, m.getY()+3, null);
+			}
 			g.drawImage(monkeyImgs[m.getMonkeyType()][m.getTier()], m.getX(), m.getY(), null);
+			
 		}
 	}
 	
