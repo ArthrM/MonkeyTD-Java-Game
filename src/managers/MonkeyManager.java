@@ -15,6 +15,7 @@ public class MonkeyManager {
 
 	private Playing playing;
 	private BufferedImage[][] monkeyImgs;
+	private BufferedImage pirateShip;
 	private ArrayList<Monkey> monkeys = new ArrayList<>();
 	private int monkeyAmount = 0;
 	
@@ -35,6 +36,7 @@ public class MonkeyManager {
 				monkeyImgs[i][j] = atlas.getSubimage(j * 32, (0 + i) * 32, 32, 32);
 			}
 		}
+		pirateShip = atlas.getSubimage(282, 128, 38, 33);
 		
 	}
 	
@@ -92,9 +94,11 @@ public class MonkeyManager {
 
 	public void draw(Graphics g) {
 		
-		for(Monkey m : monkeys)
+		for(Monkey m : monkeys) {
+			if(m.getMonkeyType() == PIRATE_M)
+				g.drawImage(pirateShip,m.getX()-3,m.getY()+3,null);
 			g.drawImage(monkeyImgs[m.getMonkeyType()][m.getTier()], m.getX(), m.getY(), null);
-		
+		}
 	}
 	
 	public Monkey getMonkeyAt(int x, int y) {
