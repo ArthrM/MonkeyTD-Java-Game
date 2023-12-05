@@ -21,7 +21,7 @@ public class ActionBar extends Bar{
 	
 	private DecimalFormat formater;
 	
-	private int gold = 125;
+	private int gold = 150;
 	private boolean showMonkeyCost;
 	private int monkeyCostType;
 	
@@ -39,7 +39,7 @@ public class ActionBar extends Bar{
 		lives = 25;
 		monkeyCostType = 0;
 		showMonkeyCost = false;
-		gold = 125;
+		gold = 200;
 		selectedMonkey = null;
 		displayedMonkey = null;
 	}
@@ -142,21 +142,21 @@ public class ActionBar extends Bar{
 			g.setColor(Color.black);
 			g.drawRect(410, 645, 220, 85);
 			g.drawRect(420, 650, 50, 50);
-			g.drawImage(playing.getMonkeyManager().getMonkeyImgs()[displayedMonkey.getMonkeyType()], 420, 653, 50, 50, null);
+			g.drawImage(playing.getMonkeyManager().getMonkeyImgs()[displayedMonkey.getMonkeyType()][displayedMonkey.getTier()], 420, 653, 50, 50, null);
 			g.setColor(Color.black);
 			g.setFont(new Font("Rockwell", Font.BOLD, 15));
 			g.drawString("" + Monkeys.GetName(displayedMonkey.getMonkeyType()), 475, 662);
 			g.drawString("ID " + displayedMonkey.getId(), 475, 677);
-			g.drawString("LvL " + displayedMonkey.getTier(), 575, 662);
+			g.drawString("LvL " + (displayedMonkey.getTier() + 1), 575, 662);
 			drawDisplayedMonkeyBorder(g);
 			
 			sellMonkey.draw(g);
-			if (displayedMonkey.getTier() < 3)
+			if (displayedMonkey.getTier() < 2)
 				upgradeMonkey.draw(g);
 			
 			if(sellMonkey.isMouseOver()) {
 				g.drawString("Vender por " + getSellAmount(displayedMonkey) + "$" , 490, 695);
-			} else if(upgradeMonkey.isMouseOver()) {
+			} else if(upgradeMonkey.isMouseOver() && displayedMonkey.getTier() < 2) {
 				g.drawString("Upgrade por " + getUpgradeAmount(displayedMonkey) + "$" , 490, 695);
 
 			}
@@ -170,7 +170,7 @@ public class ActionBar extends Bar{
 
 	private int getSellAmount(Monkey displayedMonkey) {
 		
-		int anyUpgradeCost = (int)(((displayedMonkey.getTier() - 1) * getUpgradeAmount(displayedMonkey) ) * 0.4f);
+		int anyUpgradeCost = (int)((displayedMonkey.getTier() * getUpgradeAmount(displayedMonkey) ) * 0.4f);
 		int monkeySellCost = (int)(helperMethods.Constants.Monkeys.GetMonkeyCost(displayedMonkey.getMonkeyType()) * 0.4f);
 		
 		return monkeySellCost + anyUpgradeCost;
@@ -196,7 +196,7 @@ public class ActionBar extends Bar{
 		for(MyButton b : monkeyButtons) {
 			g.setColor(Color.GRAY);
 			g.fillRect(b.x, b.y, b.width, b.height);
-			g.drawImage(playing.getMonkeyManager().getMonkeyImgs()[b.getId()], b.x, b.y, b.width, b.height, null);
+			g.drawImage(playing.getMonkeyManager().getMonkeyImgs()[b.getId()][0], b.x, b.y, b.width, b.height, null);
 			drawButtonFeedbacks(g,b);
 		
 		}
@@ -229,7 +229,7 @@ public class ActionBar extends Bar{
 			if(sellMonkey.getBounds().contains(x, y)) {
 				sellMonkeyClicked();
 				return;
-			} else if (upgradeMonkey.getBounds().contains(x, y) && displayedMonkey.getTier() < 3 && gold >= getUpgradeAmount(displayedMonkey)) {
+			} else if (upgradeMonkey.getBounds().contains(x, y) && displayedMonkey.getTier() < 2 && gold >= getUpgradeAmount(displayedMonkey)) {
 				upgradeMonkeyClicked();
 				return;
 			}

@@ -15,21 +15,21 @@ public class Constants {
 		public static float GetSpeed(int type) {
 			switch(type) {
 			case DART:
-				return 7.7f;
-			case MAGIC_1:
-				return 8.5f;
-			case MAGIC_2:
-				return 7f;
-			case MAGIC_3:
-				return 7f;
-			case ICY_DART:
-				return 7.7f;
-			case KNIFE:
 				return 10f;
-			case CANNON_BALL:
-				return 8.2f;
-			case BULLET:
+			case MAGIC_1:
 				return 12f;
+			case MAGIC_2:
+				return 13f;
+			case MAGIC_3:
+				return 14.5f;
+			case ICY_DART:
+				return 10f;
+			case KNIFE:
+				return 15f;
+			case CANNON_BALL:
+				return 14.5f;
+			case BULLET:
+				return 30.1f;
 				
 			}
 			
@@ -97,15 +97,15 @@ public class Constants {
 		public static int GetDefaultDmg(int monkeyType) {
 			switch(monkeyType) {
 			case DART_M:
-				return 5;
+				return 8;
 			case MAGE_M:
 				return 10;
 			case ICY_M:
 				return 2;
 			case GUNNER_M:
-				return 25;
+				return 12;
 			case PIRATE_M:
-				return 15;
+				return 17;
 			case DIO_M:
 				return 5;
 			}
@@ -124,7 +124,7 @@ public class Constants {
 			case ICY_M:
 				return 80;
 			case GUNNER_M:
-				return 135;
+				return 125;
 			case PIRATE_M:
 				return 110;
 			case DIO_M:
@@ -137,17 +137,17 @@ public class Constants {
 		public static float GetDefaultCooldown(int monkeyType) {
 			switch(monkeyType) {
 			case DART_M:
-				return 34;
+				return 37;
 			case MAGE_M:
-				return 42;
+				return 43;
 			case ICY_M:
-				return 28f;
+				return 23f;
 			case GUNNER_M:
 				return 60f;
 			case PIRATE_M:
 				return 48f;
 			case DIO_M:
-				return 19f;
+				return 18f;
 			}
 			
 			return 0;
@@ -180,6 +180,8 @@ public class Constants {
 		public static final int BLUE_BL = 1;
 		public static final int GREEN_BL = 2;
 		public static final int YELLOW_BL = 3;
+		public static final int BLACK_BL = 5;
+		public static final int LEAD_BL = 6;
 		
 		public static int GetReward(int bloonType) {
 			
@@ -192,6 +194,10 @@ public class Constants {
 				return 15;
 			case YELLOW_BL:
 				return 20;
+			case BLACK_BL:
+				return 25;
+			case LEAD_BL:
+				return 25;
 			}
 			
 			return 0;
@@ -200,13 +206,17 @@ public class Constants {
 		public static float GetSpeed(int bloonType) {
 			switch(bloonType) {
 			case RED_BL:
-				return 1.1f;
+				return 0.875f;
 			case BLUE_BL:
-				return 1.35f;
+				return 1.325f;
 			case GREEN_BL:
-				return 1.6f;
+				return 1.525f;
 			case YELLOW_BL:
-				return 1.85f;
+				return 1.80f;
+			case BLACK_BL:
+				return 2.3f;
+			case LEAD_BL:
+				return 0.585f;
 			}
 			
 			return 0;
@@ -222,6 +232,10 @@ public class Constants {
 				return 15;
 			case YELLOW_BL:
 				return 20;
+			case BLACK_BL:
+				return 30;
+			case LEAD_BL:
+				return 85;
 			}
 			
 			return 0;

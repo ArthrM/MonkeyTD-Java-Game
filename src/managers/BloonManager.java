@@ -4,11 +4,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import Bloons.Bloon;
-import Bloons.BlueBloon;
-import Bloons.GreenBloon;
-import Bloons.RedBloon;
-import Bloons.YellowBloon;
+import Bloons.*;
 import helperMethods.LoadSave;
 import objects.Monkey;
 import objects.PathPoint;
@@ -179,6 +175,12 @@ public class BloonManager {
 			break;
 		case YELLOW_BL:
 			bloons.add(new YellowBloon(x, y, 0, this));
+			break;
+		case BLACK_BL:
+			bloons.add(new BlackBloon(x, y, 0, this));
+			break;
+		case LEAD_BL:
+			bloons.add(new LeadBloon(x, y, 0, this));
 			break;
 		}
 	}

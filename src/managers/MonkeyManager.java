@@ -1,6 +1,7 @@
 package managers;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -14,7 +15,8 @@ import static helperMethods.Constants.Monkeys.*;
 public class MonkeyManager {
 
 	private Playing playing;
-	private BufferedImage[] monkeyImgs;
+	private BufferedImage[][] monkeyImgs;
+	private BufferedImage pirateShip;
 	private ArrayList<Monkey> monkeys = new ArrayList<>();
 	private int monkeyAmount = 0;
 	
@@ -29,10 +31,13 @@ public class MonkeyManager {
 
 	private void loadMonkeyImgs() {
 		BufferedImage atlas = LoadSave.getSpriteAtlas();
-		monkeyImgs = new BufferedImage[6];
+		monkeyImgs = new BufferedImage[6][3];
 		for(int i = 0; i < 6; i++) {
-			monkeyImgs[i] = atlas.getSubimage(0 * 32, (0 + i ) * 32, 32, 32);
+			for(int j = 0; j < 3; j++) {
+				monkeyImgs[i][j] = atlas.getSubimage(j * 32, (0 + i) * 32, 32, 32);
+			}
 		}
+		pirateShip = atlas.getSubimage(282, 128, 38, 33);
 		
 	}
 	
@@ -90,9 +95,14 @@ public class MonkeyManager {
 
 	public void draw(Graphics g) {
 		
-		for(Monkey m : monkeys)
-			g.drawImage(monkeyImgs[m.getMonkeyType()], m.getX(), m.getY(), null);
-		
+		for(Monkey m : monkeys) {
+			
+			if(m.getMonkeyType() == PIRATE_M) {
+				g.drawImage(pirateShip, m.getX()-3, m.getY()+3, null);
+			}
+			g.drawImage(monkeyImgs[m.getMonkeyType()][m.getTier()], m.getX(), m.getY(), null);
+			
+		}
 	}
 	
 	public Monkey getMonkeyAt(int x, int y) {
@@ -105,7 +115,7 @@ public class MonkeyManager {
 		return null;
 	}
 	
-	public BufferedImage[] getMonkeyImgs() {
+	public BufferedImage[][] getMonkeyImgs() {
 		return monkeyImgs;
 	}
 

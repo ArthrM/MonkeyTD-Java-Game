@@ -12,7 +12,7 @@ public class Monkey {
 		this.y = y;
 		this.id = id;
 		this.monkeyType = monkeyType;
-		tier = 1;
+		tier = 0;
 		setDefaultDmg();
 		setDefaultRange();
 		setDefaultCooldown();
@@ -40,11 +40,12 @@ public class Monkey {
 			cooldown -= 7;
 			break;
 		case GUNNER_M:
-			range += 75;
-			cooldown /= 2;
+			dmg += 8;
+			range += 110;
+			cooldown += 25.5f;
 			break;
 		case PIRATE_M:
-			range += 15;
+			range += 25;
 			cooldown -= 7;
 			break;
 		case DIO_M:

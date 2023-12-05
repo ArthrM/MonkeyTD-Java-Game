@@ -114,9 +114,9 @@ public class ProjectileManager {
 			if(p.isActive()) {
 				g2d.translate(p.getPos().x, p.getPos().y);
 				g2d.rotate(Math.toRadians(p.getRotation() + 90));
-//				g2d.scale(1.25, 1.25);
+				g2d.scale(1.25, 1.25);
 				g2d.drawImage(proj_imgs[p.getProjectileType()], -16, -16, null);
-//				g2d.scale(1 / 1.25, 1 / 1.25);
+				g2d.scale(1 / 1.25, 1 / 1.25);
 				g2d.rotate(-Math.toRadians(p.getRotation() + 90));
 				g2d.translate(-p.getPos().x, -p.getPos().y);
 			}
@@ -127,7 +127,12 @@ public class ProjectileManager {
 		case DART_M:
 			return DART;
 		case MAGE_M:
-			return MAGIC_1;
+			if(m.getTier() == 0)
+				return MAGIC_1;
+			if(m.getTier() == 1)
+				return MAGIC_2;
+			if(m.getTier() == 2)
+				return MAGIC_3;
 		case ICY_M:
 			return ICY_DART;
 		case GUNNER_M:

@@ -58,10 +58,10 @@ public class WaveManager {
 	private void createWaves() {
 		
 //		waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(0,0,0))));
-		waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0))));
-		waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,2,2,2,2,2,2))));
-		waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(1,1,1,1,1,1,1,2,1,2,1,2,1,2,1,2,2,2,2,2,2,2,2,2,2))));
-		waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(2,3,2,3,2,3,2,3,2,3,2,0,0,0,0,0,0,0,0,0,0,3,3,3,3,3,3,3,3,3,3,3))));
+		waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,3,5))));
+		waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,2,2,2,2,2,2,5))));
+		waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(1,1,1,1,1,1,1,2,1,2,1,2,1,2,1,2,2,2,2,2,2,2,2,2,2,6,6,6,6,6,6,6))));
+		waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(2,3,2,3,2,3,2,3,2,3,2,0,0,0,0,0,0,0,0,0,0,3,3,3,3,3,3,3,3,3,3,3,5,5,5,5))));
 	}
 
 	public ArrayList<Wave> getWaves() {
