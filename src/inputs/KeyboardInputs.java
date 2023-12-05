@@ -43,7 +43,8 @@ public class KeyboardInputs implements KeyListener {
 			game.getEditor().keyPressed(e);
 		else if(GameStates.gameState == PLAYING)
 			game.getPlaying().keyPressed(e);
-			
+		else if(GameStates.gameState == SETTINGS)
+			game.getSettings().keyPressed(e);
 		
 	}
 

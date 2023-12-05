@@ -1,8 +1,8 @@
-/helperMethods/
-/inputs/
-/main/
-/scenes/
 /ui/
-/events/
-/managers/
+/objects/
+/helperMethods/
 /Bloons/
+/managers/
+/scenes/
+/main/
+/inputs/

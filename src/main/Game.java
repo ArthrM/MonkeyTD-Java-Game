@@ -6,6 +6,7 @@ import helperMethods.LoadSave;
 import managers.TileManager;
 import scenes.Credits;
 import scenes.Editing;
+import scenes.GameOver;
 import scenes.Menu;
 import scenes.Playing;
 import scenes.Settings;
@@ -25,6 +26,7 @@ public class Game extends JFrame implements Runnable {
 	private Settings settings;
 	private Editing editing;
 	private Credits credits;
+	private GameOver gameOver;
 	
 	private TileManager tileManager;
 
@@ -45,6 +47,7 @@ public class Game extends JFrame implements Runnable {
 		settings = new Settings(this);
 		editing = new Editing(this);
 		credits = new Credits(this);
+		gameOver = new GameOver(this);
 		
 	}
 
@@ -172,6 +175,9 @@ public class Game extends JFrame implements Runnable {
 		return tileManager;
 	}
 
+	public GameOver getGameOver() {
+		return gameOver;
+	}
 	
 	
 }

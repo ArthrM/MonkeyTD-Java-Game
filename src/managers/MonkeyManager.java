@@ -32,7 +32,6 @@ public class MonkeyManager {
 		monkeyImgs = new BufferedImage[6];
 		for(int i = 0; i < 6; i++) {
 			monkeyImgs[i] = atlas.getSubimage(0 * 32, (0 + i ) * 32, 32, 32);
-			
 		}
 		
 	}
@@ -41,6 +40,21 @@ public class MonkeyManager {
 		monkeys.add(new Monkey(xPos, yPos, monkeyAmount++, selectedMonkey.getMonkeyType()));
 		
 	}
+	
+	
+	public void upgradeMonkey(Monkey displayedMonkey) {
+		for(Monkey m : monkeys)
+			if(m.getId() == displayedMonkey.getId())
+				m.upgradeMonkey();
+		
+	}
+	
+	public void removeMonkey(Monkey displayedMonkey) {
+		for(int i = 0; i < monkeys.size(); i++)
+			if(monkeys.get(i).getId() == displayedMonkey.getId())
+				monkeys.remove(i);
+	}
+
 	
 	public void update() {
 		for(Monkey m : monkeys) {
@@ -52,15 +66,14 @@ public class MonkeyManager {
 	private void attackBloonIfClose(Monkey m) {
 		
 			for(Bloon bl : playing.getBloonManager().getBloons()) {
-				if(bl.isAlive())
+				if(bl.isAlive()) {
 					if(isBloonInRange(m, bl)) {
 						if(m.isCooldownOver()) {
 							playing.shootBloon(m, bl);
 							m.resetCooldown();
 						}
-					} else {
-					
 					}
+				}	
 			}
 	}
 		
@@ -96,5 +109,9 @@ public class MonkeyManager {
 		return monkeyImgs;
 	}
 
+	public void reset() {
+		monkeys.clear();
+		monkeyAmount = 0;
+	}
 	
 }

@@ -10,6 +10,7 @@ import Bloons.GreenBloon;
 import Bloons.RedBloon;
 import Bloons.YellowBloon;
 import helperMethods.LoadSave;
+import objects.Monkey;
 import objects.PathPoint;
 import scenes.Playing;
 import static helperMethods.Constants.Direction.*;
@@ -30,10 +31,6 @@ public class BloonManager {
 		this.start = start;
 		this.end = end;
 		loadEffectImg();
-/*		addBloon(RED_BL);
-		addBloon(BLUE_BL);
-		addBloon(GREEN_BL);
-		addBloon(YELLOW_BL);*/
 		loadBloonImgs();
 	}
 	
@@ -74,7 +71,7 @@ public class BloonManager {
 			bl.move(GetSpeed(bl.getBloonType()), bl.getLastDir());
 		}else if(isAtEnd(bl)) {
 			bl.kill();
-			System.out.println("Lives lost!!!");
+			playing.removeOneLife();
 		}else {
 			//Acha nova direção
 			setNewDirectionAndMove(bl);
@@ -162,26 +159,26 @@ public class BloonManager {
 
 	public void spawnBloon(int nextBloon) {
 		addBloon(nextBloon);
-		
 	}
 	
-	public void addBloon(int enemyType) {
+	
+	public void addBloon(int bloonType) {
 		
 		int x = start.getxCord() * 32;
 		int y = start.getyCord() * 32;
 		
-		switch(enemyType) {
+		switch(bloonType) {
 		case RED_BL:
-			bloons.add(new RedBloon(x, y, 0));
+			bloons.add(new RedBloon(x, y, 0, this));
 			break;
 		case BLUE_BL:
-			bloons.add(new BlueBloon(x, y, 0));
+			bloons.add(new BlueBloon(x, y, 0, this));
 			break;
 		case GREEN_BL:
-			bloons.add(new GreenBloon(x, y, 0));
+			bloons.add(new GreenBloon(x, y, 0, this));
 			break;
 		case YELLOW_BL:
-			bloons.add(new YellowBloon(x, y, 0));
+			bloons.add(new YellowBloon(x, y, 0, this));
 			break;
 		}
 	}
@@ -209,5 +206,13 @@ public class BloonManager {
 		return bloons;
 	}
 
+	public void rewardPlayer(int bloonType) {
+		playing.rewardPlayer(bloonType);
+		
+	}
+
+	public void reset() {
+		bloons.clear();
+	}
 
 }

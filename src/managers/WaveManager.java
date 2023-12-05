@@ -10,7 +10,7 @@ public class WaveManager {
 
 	private Playing playing;
 	private ArrayList<Wave> waves = new ArrayList<>();
-	private int bloonSpawnTickLimit = 60 * 1;
+	private int bloonSpawnTickLimit = (int) (60 * 0.575f);
 	private int bloonSpawnTick = bloonSpawnTickLimit;
 	private int bloonIndex, waveIndex;
 	private int waveTickLimit = 60 * 5;
@@ -36,6 +36,7 @@ public class WaveManager {
 	
 	public void increaseWaveIndex() {
 		waveIndex++;
+		waveTick = 0;
 		waveTickTimerOver = false;
 		waveStartTimer = false;
 	}
@@ -56,9 +57,11 @@ public class WaveManager {
 	
 	private void createWaves() {
 		
-		waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(1,1,1,1,1,1,1,1,1,2))));
-		waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(3,1,1,1,1,1,1,1,1,2))));
-
+//		waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(0,0,0))));
+		waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0))));
+		waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,2,2,2,2,2,2))));
+		waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(1,1,1,1,1,1,1,2,1,2,1,2,1,2,1,2,2,2,2,2,2,2,2,2,2))));
+		waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(2,3,2,3,2,3,2,3,2,3,2,0,0,0,0,0,0,0,0,0,0,3,3,3,3,3,3,3,3,3,3,3))));
 	}
 
 	public ArrayList<Wave> getWaves() {
@@ -96,4 +99,14 @@ public class WaveManager {
 		return waveStartTimer;
 	}
 	
+	public void reset() {
+		waves.clear();
+		createWaves();
+		bloonIndex = 0;
+		waveIndex = 0;
+		waveStartTimer = false;
+		waveTickTimerOver = false;
+		waveTick = 0;
+		bloonSpawnTick = bloonSpawnTickLimit;
+	}
 }

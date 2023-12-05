@@ -3,6 +3,7 @@ package scenes;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
 
 import main.Game;
 import ui.MyButton;
@@ -11,23 +12,19 @@ import static main.GameStates.*;
 public class Settings extends GameScene implements SceneMethods {
 
 	private MyButton bMainMenu;
-	private MyButton bExtra;
-	private MyButton bTimer;
-	private MyButton bPersona;
+	private MyButton bBack2Playing;
 	private MyButton bCredits;
 	
 	public Settings(Game game) {
 		super(game);
 		initButtons();
-	///	creditScreen = new CreditScreen(null);
 	}
 
 	private void initButtons() {
-		bMainMenu = new MyButton("Save & Return", 10, 10, 150, 50);
-		bExtra = new MyButton("Tutorial", 245, 150, 150, 50);
-	 	bTimer = new MyButton("Tempo", 245, 250, 150, 50);
-		bPersona = new MyButton("Personagens", 245, 350, 150, 50);
-		bCredits = new MyButton("Créditos", 245, 450, 150, 50);	}
+		bBack2Playing = new MyButton("Voltar ao jogo", 245, 250, 150, 50);
+		bCredits = new MyButton("Créditos", 245, 350, 150, 50);
+		bMainMenu = new MyButton("Save & Return", 245, 450, 150, 50);
+	}
 
 	@Override
 	public void render(Graphics g) {
@@ -48,19 +45,27 @@ public class Settings extends GameScene implements SceneMethods {
 	public void drawButtons(Graphics g) {
 		g.setFont(new Font("Arial", Font.PLAIN, 15));
 		bMainMenu.draw(g);
-		bExtra.draw(g);
-		bTimer.draw(g);
-		bPersona.draw(g);
+		bBack2Playing.draw(g);
 		bCredits.draw(g);
 	}
 
+	public void keyPressed(KeyEvent e) {
+		if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+			game.getPlaying().setGamePaused(false);
+			SetGameState(PLAYING);
+		}
+	}
+	
 	@Override
 	public void mouseClicked(int x, int y) {
 		if(bMainMenu.getBounds().contains(x, y)) {
 			SetGameState(MENU);
-		} else if(bCredits.getBounds().contains(x,y)){
+		} else if(bCredits.getBounds().contains(x, y)){
 			SetGameState(CREDITS);
-			game.getCredits();
+		} else if(bBack2Playing.getBounds().contains(x, y)) {
+			SetGameState(PLAYING);
+			game.getPlaying().setGamePaused(false);
+			
 		}
 		
 	}
@@ -68,19 +73,13 @@ public class Settings extends GameScene implements SceneMethods {
 	@Override
 	public void mouseMoved(int x, int y) {
 		bMainMenu.setMouseOver(false);
-		bExtra.setMouseOver(false);
-		bTimer.setMouseOver(false);
-		bPersona.setMouseOver(false);
+		bBack2Playing.setMouseOver(false);
 		bCredits.setMouseOver(false);
 		
 		if(bMainMenu.getBounds().contains(x, y)) {
 			bMainMenu.setMouseOver(true);
-		} else if(bExtra.getBounds().contains(x, y)) {
-			bExtra.setMouseOver(true);
-		} else if(bTimer.getBounds().contains(x, y)) {
-			bTimer.setMouseOver(true);
-		} else if(bPersona.getBounds().contains(x,y)){
-			bPersona.setMouseOver(true);
+		} else if(bBack2Playing.getBounds().contains(x, y)) {
+			bBack2Playing.setMouseOver(true);
 		} else if(bCredits.getBounds().contains(x,y)){
 			bCredits.setMouseOver(true);
 		}
@@ -92,12 +91,8 @@ public class Settings extends GameScene implements SceneMethods {
 		
 		if(bMainMenu.getBounds().contains(x, y)) {
 			bMainMenu.setMousePressed(true);
-		} else if(bExtra.getBounds().contains(x,y)){
-			bExtra.setMousePressed(true);
-		} else if(bTimer.getBounds().contains(x,y)){
-			bTimer.setMousePressed(true);
-		} else if(bPersona.getBounds().contains(x,y)){
-			bPersona.setMousePressed(true);
+		} else if(bBack2Playing.getBounds().contains(x,y)){
+			bBack2Playing.setMousePressed(true);
 		} else if(bCredits.getBounds().contains(x,y)){
 			bCredits.setMousePressed(true);
 		}
@@ -119,9 +114,7 @@ public class Settings extends GameScene implements SceneMethods {
 	
 	private void resetButtons() {
 		bMainMenu.resetBooleans();
-		bExtra.resetBooleans();
-		bTimer.resetBooleans();
-		bPersona.resetBooleans();
+		bBack2Playing.resetBooleans();
 		bCredits.resetBooleans();
 	}
 

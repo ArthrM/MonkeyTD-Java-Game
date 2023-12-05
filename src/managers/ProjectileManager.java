@@ -58,6 +58,14 @@ public class ProjectileManager {
 		if(xDist < 0)
 			rotate += 180;
 		
+		for(Projectile p : projectiles)
+			if(!p.isActive())
+				if(p.getProjectileType() == type) {
+					p.reuse(m.getX() + 16, m.getY() + 16, xSpeed, ySpeed, m.getDmg(), rotate);
+					return;
+				}
+			
+		
 		projectiles.add(new Projectile(m.getX() + 16, m.getY() + 16, xSpeed, ySpeed, m.getDmg(), rotate, proj_id++, type));
 		
 	}
@@ -69,19 +77,30 @@ public class ProjectileManager {
 				p.move();
 				if(isProjHittingBloon(p)) {
 					p.setActive(false);
-				} else {
-					
+				} else if(isProjOutsideBounds(p)){
+					p.setActive(false);
 				}
 			}
 	}
 	
+	private boolean isProjOutsideBounds(Projectile p) {
+		if(p.getPos().x >= 0)
+			if(p.getPos().x <= 640)
+				if(p.getPos().y >= 0)
+					if(p.getPos().y <= 800)
+						return false;
+		return true;
+	}
+
 	private boolean isProjHittingBloon(Projectile p) {
 		for(Bloon bl : playing.getBloonManager().getBloons()) {
-			if(bl.getBounds().contains(p.getPos())) {
-				bl.hurt(p.getDamage());
-				if(p.getProjectileType() == ICY_DART)
-					bl.slow();
+			if(bl.isAlive()) {
+				if(bl.getBounds().contains(p.getPos())) {
+					bl.hurt(p.getDamage());
+					if(p.getProjectileType() == ICY_DART)
+						bl.slow();
 				return true;
+				}
 			}
 		}
 		return false;
@@ -119,5 +138,10 @@ public class ProjectileManager {
 			return KNIFE;
 		}
 		return 0;
+	}
+	
+	public void reset() {
+		projectiles.clear();
+		proj_id = 0;
 	}
 }

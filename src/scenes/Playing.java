@@ -3,6 +3,7 @@ package scenes;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -31,11 +32,11 @@ public class Playing extends GameScene implements SceneMethods{
 	private MonkeyManager monkeyManager;
 	private ProjectileManager projManager;
 	private WaveManager waveManager;
-	
+	private boolean gamePaused = true;
+	private boolean isGameWon = false;
 	private boolean drawSelect = false;
 	private boolean isMouseDragging = false;
 	private boolean isMousePressed = false;
-	
 	private PathPoint start, end;
 	private Monkey selectedMonkey;
 	
@@ -71,37 +72,47 @@ public class Playing extends GameScene implements SceneMethods{
 	
 	public void update() {
 		
-		updateTick();
-		waveManager.update();
-		
-		if(areAllEnemiesDead()) {
-			if(areThereMoreWaves()) {
-				waveManager.startWaveTimer();
-				if(isWaveTimeOver()) {
-					waveManager.increaseWaveIndex();
-					bloonManager.getBloons().clear();
-					waveManager.resetBloonIndex();
+		if(!gamePaused) {
+			updateTick();
+			waveManager.update();
+			
+			if(areAllEnemiesDead()) {
+				if(areThereMoreWaves()) {
+					waveManager.startWaveTimer();
+					if(isWaveTimeOver()) {
+						waveManager.increaseWaveIndex();
+						bloonManager.getBloons().clear();
+						waveManager.resetBloonIndex();
+					}
+				} else {
+					setGameWinState(true);
+					SetGameState(GAMEOVER);
 				}
-				
 			}
-		}
 		
-		if(isTimeForNewBloon()) {
-			spawnBloon();
-		}
+			if(isTimeForNewBloon()) {
+				spawnBloon();
+			}
 		
-		bloonManager.update();
-		monkeyManager.update();
-		projManager.update();
+			bloonManager.update();
+			monkeyManager.update();
+			projManager.update();
+		}
 	}
 	
+	public void setGameWinState(boolean state) {
+		isGameWon = state;
+	}
+	
+	public boolean isGameWon() {
+		return isGameWon;
+	}
+
 	private boolean isWaveTimeOver() {
-		
 		return waveManager.isWaveTimerOver();
 	}
 
 	private boolean areThereMoreWaves() {
-		
 		return waveManager.areThereMoreWaves();
 	}
 
@@ -149,17 +160,10 @@ public class Playing extends GameScene implements SceneMethods{
 		bloonManager.draw(g);
 		actionBar.draw(g);
 		
-		drawWaveInfos(g);
-		
 		monkeyManager.draw(g);
 		projManager.draw(g);
 		
 
-	}
-	
-	private void drawWaveInfos(Graphics g) {
-		
-		
 	}
 
 	private void drawHighLight(Graphics g) {
@@ -190,7 +194,6 @@ public class Playing extends GameScene implements SceneMethods{
 	}
 
 	private void drawButtons(Graphics g) {
-		
 		drawMenuButton(g);
 	}
 	
@@ -259,19 +262,59 @@ public class Playing extends GameScene implements SceneMethods{
 		
 	}
 	
+	
+	
+	public void setGamePaused(boolean state) {
+		gamePaused = state;
+	}
+
+	private void removeGold(int monkeyType) {
+		actionBar.payForMonkey(monkeyType);
+	}
+	
+	public void removeMonkey(Monkey displayedMonkey) {
+		monkeyManager.removeMonkey(displayedMonkey);
+		
+	}
+	
+	public void upgradeMonkey(Monkey displayedMonkey) {
+		monkeyManager.upgradeMonkey(displayedMonkey);
+		
+	}
+	
+	public void rewardPlayer(int bloonType) {
+		actionBar.addGold(helperMethods.Constants.Bloons.GetReward(bloonType));
+	}
+
+	public void keyPressed(KeyEvent e) {
+		if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+			setGamePaused(true);
+			SetGameState(SETTINGS);
+		}
+	}
+	
+	public void mouse2Clicked(int x, int y) {
+			selectedMonkey = null;
+	}
+
 	@Override
 	public void mouseClicked(int x, int y) {
 
 		if(y >= 640) {
 			actionBar.mouseClicked(x, y);
-		} else if(bMenu.getBounds().contains(x, y))
+		} else if(bMenu.getBounds().contains(x, y)) {
+			setGamePaused(true);
 			SetGameState(SETTINGS);
+		}
 		else {
+			// Acima de 640y
 			if(selectedMonkey != null) {
+				// Tenta colocar um macaco
 				if(isTilePlaceable(mouseX, mouseY)) {
 					if(getMonkeyAt(mouseX, mouseY) == null) {
-					monkeyManager.addMonkey(selectedMonkey, mouseX, mouseY);
-					selectedMonkey = null;
+						monkeyManager.addMonkey(selectedMonkey, mouseX, mouseY);
+						removeGold(selectedMonkey.getMonkeyType());
+						selectedMonkey = null;
 					}
 				}
 			} else {
@@ -281,13 +324,6 @@ public class Playing extends GameScene implements SceneMethods{
 		}
 	}
 	
-	public void keyPressed(KeyEvent e) {
-		if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-			selectedMonkey = null;
-		}
-		
-	}
-
 	@Override
 	public void mouseMoved(int x, int y) {
 		
@@ -339,9 +375,36 @@ public class Playing extends GameScene implements SceneMethods{
 		bMenu.resetBooleans();
 		
 	}
+	
+	public boolean isGamePaused() {
+		return gamePaused;
+	}
 
+	public Playing getPlaying() {
+		return this;
+	}
 
+	public void removeOneLife() {
+		actionBar.removeOneLife();
+		
+	}
 
+	public void resetAll() {
+		
+		actionBar.resetAll();
+		
+		bloonManager.reset();
+		monkeyManager.reset();
+		projManager.reset();
+		waveManager.reset();
+		mouseX = 0;
+		mouseY = 0;
+		selectedMonkey = null;
+		gamePaused = false;
+	}
 
+	
+
+	
 
 }

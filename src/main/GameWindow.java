@@ -11,9 +11,9 @@ public class GameWindow {
 		 
 		jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jframe.add(gamePanel);
-//		jframe.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		jframe.setLocationRelativeTo(null);
 		jframe.setResizable(false);
+		jframe.setTitle("Jogo do Macaco");
 		jframe.pack();
 		jframe.setVisible(true);
 	
