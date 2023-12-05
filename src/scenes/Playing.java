@@ -175,7 +175,7 @@ public class Playing extends GameScene implements SceneMethods{
 	private void drawSelectedMonkey(Graphics g) {
 		
 		if(selectedMonkey != null)
-			g.drawImage(monkeyManager.getMonkeyImgs()[selectedMonkey.getMonkeyType()], mouseX, mouseY, null);
+			g.drawImage(monkeyManager.getMonkeyImgs()[selectedMonkey.getMonkeyType()][selectedMonkey.getTier()], mouseX, mouseY, null);
 		
 	}
 

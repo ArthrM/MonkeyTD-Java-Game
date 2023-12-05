@@ -12,7 +12,7 @@ public class Monkey {
 		this.y = y;
 		this.id = id;
 		this.monkeyType = monkeyType;
-		tier = 1;
+		tier = 0;
 		setDefaultDmg();
 		setDefaultRange();
 		setDefaultCooldown();
